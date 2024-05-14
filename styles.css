@@ -1,0 +1,164 @@
+:root {
+  --main-color: #FFA0A0;
+  --secondary-color: #FFA9A9;
+}
+
+@font-face {
+  font-family: 'Norse-Bold';
+  src: url('./assets/Norse-Bold.otf');
+}
+
+body {
+  font-family: Tahoma, Verdana, sans-serif;
+  background-color: #f5f5f5;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  display: flex;
+  flex: 1;
+}
+
+#logo-section {
+  background-image: url('./assets/background.jpg');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+}
+
+#logo {
+  position: relative;
+  top: -16%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  color: white;
+  height: 9rem;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  width: 100%;
+  background: rgba(50, 50, 50, 0.4);
+  padding: 1rem 0;
+}
+
+#logo img {
+  width: auto;
+  height: 100%;
+}
+
+#logo-text {
+  font-family: 'Norse-Bold';
+  font-size: 110px;
+}
+
+#form-section {
+  flex: 1;
+  background-color: #f9fafb;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#form-text {
+  font-size: 1.4rem;
+  margin-bottom: -4rem;
+  padding: 0 3rem;
+}
+
+form {
+  margin-top: -2rem;
+  position: relative;
+  top: 13%;
+}
+
+#form-container {
+  background-color: white;
+  padding: 3rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding-top: 1.2rem ;
+  padding-right: 20%;
+  padding-bottom: 2rem;
+  height: 60%;
+}
+
+form h2 {
+  margin-top: 0;
+  padding: .4rem 0 1rem 0;
+}
+
+fieldset {
+  border: none;
+  padding: 0;
+  margin-bottom: 1.2rem;
+}
+
+.form-row {
+  display: flex;
+  gap: 4rem;
+}
+
+.form-field {
+  width: 240px;
+}
+
+label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 0.2rem;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+input {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: var(--main-color);
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  width: 210px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  margin-top: 2rem;
+  margin-left: 3rem;
+}
+
+button:hover {
+  background-color: var(--secondary-color);
+  box-shadow: 2px 2px 5px rgba(50, 49, 49, 0.1);
+}
+
+#login {
+  font-size: 17px;
+  margin-left: 3rem;
+}
+
+#login a {
+  text-decoration: none;
+  color:var(--main-color);
+}
+
+#login a:hover {
+  text-decoration: underline;
+}
+
+footer {
+  background-color: var(--main-color);
+  color: white;
+  text-align: center;
+  padding: .1rem;
+}
