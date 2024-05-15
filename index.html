@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link rel="stylesheet" href="./styles.css">
+  <script src="app.js" defer></script>
 </head>
 <body>
   <main>
@@ -50,7 +51,7 @@
               </div>
               <div class="form-field">
                 <label for="phone">PHONE NUMBER *</label>
-                <input type="tel" id="phone" name="phone" placeholder="(123) 456-7899" maxlength="10" pattern="\(\d{3}\) ?\d{3}-?\d{4}" title="Please enter your phone number." required />
+                <input type="tel" id="phone" name="phone" placeholder="(123) 456-7890" maxlength="20" pattern="(1 )?(\(\d{3}\) ?\d{3}-\d{4})|(\d{11})" title="Please enter your phone number." required />
               </div>
             </div>
           </fieldset>
