@@ -59,10 +59,12 @@
               <div class="form-field">
                 <label for="password">PASSWORD *</label>
                 <input type="password" id="password" name="password" placeholder="********" minlength="8" maxlength="40" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}" title="Password must contain at least one digit, one lowercase letter, one uppercase letter, one non-word character, and be at least 8 characters long." required />
+                <i toggle="#password" class="field-icon"><img src="./assets/show.svg" alt="Show Password"></i>
               </div>
               <div class="form-field">
                 <label for="confirm-password">CONFIRM PASSWORD *</label>
                 <input type="password" id="confirm-password" name="confirm-password" placeholder="********" minlength="8" maxlength="40" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}" pattern="((?=.*\d)(?=.*\W+))" title="Please confirm your password" required />
+                <i toggle="#confirm-password" class="field-icon"><img src="./assets/show.svg" alt="Show Password"></i>
               </div>
             </div>
           </fieldset>

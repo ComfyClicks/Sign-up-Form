@@ -25,6 +25,8 @@ main {
   flex: 1;
 }
 
+/******** Logo Section ********/
+
 #logo-section {
   background-image: url('./assets/background.jpg');
   background-size: cover;
@@ -78,6 +80,8 @@ main {
 #credit a:hover {
   color: #f6551b;
 }
+
+/******** Form Section ********/
 
 #form-section {
   flex: 1;
@@ -165,6 +169,19 @@ input:invalid:not(:placeholder-shown) {
   border-color: #FF0000;
 }
 
+.field-icon img{
+  position: relative;
+  width: 20px;
+  height: auto;
+  left: 215px;
+  bottom: 27px;
+  transition: filter;
+}
+
+.field-icon:hover img {
+  filter: brightness(50%);
+}
+
 button {
   background-color: var(--main-color);
   color: white;
@@ -196,6 +213,8 @@ button:hover {
 #login a:hover {
   text-decoration: underline;
 }
+
+/******** Footer ********/
 
 footer {
   background-color: var(--main-color);
