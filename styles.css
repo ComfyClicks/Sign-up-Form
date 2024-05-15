@@ -1,3 +1,5 @@
+
+
 :root {
   --main-color: #FFA0A0;
   --secondary-color: #FFA9A9;
@@ -28,14 +30,15 @@ main {
   background-size: cover;
   background-position: center;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
   width: 40%;
 }
 
 #logo {
   position: relative;
-  top: -16%;
+  top: 27%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -56,6 +59,24 @@ main {
 #logo-text {
   font-family: 'Norse-Bold';
   font-size: 110px;
+}
+
+#credit {
+  align-self: flex-end;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  color: white;
+  font-size: 14px;
+}
+
+#credit a {
+  color: #ff6b35;
+}
+
+#credit a:hover {
+  color: #f6551b;
 }
 
 #form-section {
@@ -82,16 +103,23 @@ form {
   background-color: white;
   padding: 3rem;
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 5px 6px rgba(0, 0, 0, 0.1);
   padding-top: 1.2rem ;
   padding-right: 20%;
   padding-bottom: 2rem;
   height: 60%;
 }
 
-form h2 {
+legend h2 {
   margin-top: 0;
-  padding: .4rem 0 1rem 0;
+  margin-bottom: 0;
+  padding: .4rem 0 0 0;
+}
+
+legend p {
+  padding: 0 0 1em 0;
+  font-size: 14px;
+  color: #343333;
 }
 
 fieldset {
@@ -107,6 +135,7 @@ fieldset {
 
 .form-field {
   width: 240px;
+  color: #343333;
 }
 
 label {
@@ -119,9 +148,21 @@ label {
 input {
   width: 100%;
   padding: 0.6rem;
-  border: 1px solid #ccc;
+  border: 1px solid #E5E7EB;
   border-radius: 4px;
   box-sizing: border-box;
+}
+
+input:focus {
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+input:valid:not(:placeholder-shown) {
+  border-color: green;
+}
+
+input:invalid:not(:placeholder-shown) {
+  border-color: #FF0000;
 }
 
 button {
@@ -159,6 +200,17 @@ button:hover {
 footer {
   background-color: var(--main-color);
   color: white;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: .1rem;
+  height: 3vh;
+}
+
+footer a {
+  color: #ff6b35;
+}
+
+footer a:hover {
+  color: #f6551b;
 }

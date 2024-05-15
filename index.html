@@ -13,6 +13,9 @@
         <img src="./assets/odin-lined.png" alt="Odin Logo" />
         <h1 id="logo-text">ODIN</h1>
       </div>
+      <div id="credit">
+        <p>Photo by <a href="https://unsplash.com/@eberhardgross">eberhard 🖐 grossgasteiger</a> on <a href="https://unsplash.com/">Unsplash</a></p>
+      </div>
     </section>
     <section id="form-section">
       <div id="form-text">
@@ -21,54 +24,57 @@
       </div>
       <form>
         <div id="form-container">
-          <h2>Let's do this!</h2>
+          <legend>
+            <h2>Let's do this!</h2>
+            <p><em>Items with an asterisk (*) are required.</em></p>
+          </legend>
           <fieldset>
             <div class="form-row">
               <div class="form-field">
                 <label for="first-name">
-                  <span>FIRST NAME</span>
+                  <span>FIRST NAME *</span>
                 </label>
-                <input type="text" id="first-name" name="first-name" />
+                <input type="text" id="first-name" name="first-name" placeholder="John" maxlength="50" pattern="[a-zA-Z\s\-']+" title="Please enter your first name." required />
               </div>
               <div class="form-field">
-                <label for="last-name">LAST NAME</label>
-                <input type="text" id="last-name" name="last-name" />
+                <label for="last-name">LAST NAME *</label>
+                <input type="text" id="last-name" name="last-name" placeholder="Smith" maxlength="50" pattern="[a-zA-Z\s\-']+" title="Please enter your last name." required />
               </div>
             </div>
           </fieldset>
           <fieldset>  
             <div class="form-row">
               <div class="form-field">
-                <label for="email">EMAIL</label>
-                <input type="email" id="email" name="email" />
+                <label for="email">EMAIL *</label>
+                <input type="email" id="email" name="email" placeholder="JohnSmith@email.com" maxlength="100" title="Please enter your email address." required />
               </div>
               <div class="form-field">
-                <label for="phone">PHONE NUMBER</label>
-                <input type="tel" id="phone" name="phone" />
+                <label for="phone">PHONE NUMBER *</label>
+                <input type="tel" id="phone" name="phone" placeholder="(123) 456-7899" maxlength="10" pattern="\(\d{3}\) ?\d{3}-?\d{4}" title="Please enter your phone number." required />
               </div>
             </div>
           </fieldset>
           <fieldset>
             <div class="form-row">
               <div class="form-field">
-                <label for="password">PASSWORD</label>
-                <input type="password" id="password" name="password" />
+                <label for="password">PASSWORD *</label>
+                <input type="password" id="password" name="password" placeholder="********" minlength="8" maxlength="40" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}" title="Password must contain at least one digit, one lowercase letter, one uppercase letter, one non-word character, and be at least 8 characters long." required />
               </div>
               <div class="form-field">
-                <label for="confirm-password">CONFIRM PASSWORD</label>
-                <input type="password" id="confirm-password" name="confirm-password" />
+                <label for="confirm-password">CONFIRM PASSWORD *</label>
+                <input type="password" id="confirm-password" name="confirm-password" placeholder="********" minlength="8" maxlength="40" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}" pattern="((?=.*\d)(?=.*\W+))" title="Please confirm your password" required />
               </div>
             </div>
           </fieldset>
         </div>
         <button type="submit">Create Account</button>
-        <p id="login">Already have an account? <a href="">Log in</a></p>
+        <p id="login">Already have an account? <a href="">Log-in</a></p>
       </form>
     </section>
   </main>
 
   <footer id="footer">
-    <p>Copyright &copy; ComfyClicks 2024</p>
+    <p>Copyright &copy; <a href="https://github.com/ComfyClicks">ComfyClicks</a> 2024</p>
   </footer>
 </body>
 </html>
