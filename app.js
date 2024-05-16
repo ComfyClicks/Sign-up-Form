@@ -11,11 +11,23 @@ const confirmPasswordToggle = document.querySelector('#confirm-password + .field
 
 form.addEventListener('submit', (event) => {
   event.preventDefault();
-  validateEmptyFields();
-  validatePasswords(true);
-  validateInputs();
+  if (validateInputs()) {
+    // Logs form data
+    const formData = new FormData(form);
+    let formObject = {};
+    formData.forEach((value, key) => {
+      formObject[key] = value;
+    });
+  
+    // Removes password and confirmPassword from the logged form data
+    formObject['password']  = '*****';
+    delete formObject['confirm-password'];
+  
+    console.log(formObject);
+  }
 });
 
+// Checks to make sure form fields are not empty
 function validateEmptyFields() {
   const fields = [firstName, lastName, email, password, confirmPassword];
   
@@ -25,7 +37,7 @@ function validateEmptyFields() {
       return false;
     }
   }
-  
+  console.log('validateEmptyFields returned true');
   return true;
 }
 
@@ -42,12 +54,13 @@ phone.addEventListener('input', () => {
 });
 
 phone.addEventListener('keypress', (event) => {
-  if (!allowedCharacters(event)) {
+  if (!allowedPhoneCharacters(event)) {
     event.preventDefault();
   }
 });
 
-function allowedCharacters(event) {
+// Limits phone field inputs to 0-9, , +, -, (, and )
+function allowedPhoneCharacters(event) {
   var charCode = (event.which) ? event.which : event.keyCode;
   if ((charCode > 31 && (charCode < 48 || charCode > 57)) && // numeric (0-9)
       charCode !== 32 && // space  
@@ -60,6 +73,7 @@ function allowedCharacters(event) {
   return true;
 }
 
+// Checks that both password inputs match
 function validatePasswords(isSubmitEvent) {
   if (password.value !== confirmPassword.value) {
     confirmPassword.classList.add('invalid');
@@ -68,11 +82,12 @@ function validatePasswords(isSubmitEvent) {
     }
     return false;
   }
-  
+
   confirmPassword.classList.remove('invalid');
   return true;
 }
 
+// Checks against the libphonenumber library to make sure a valid phone number has been entered
 function validatePhoneNumber(phoneNumber) {
   const parsedNumber = libphonenumber.parsePhoneNumberFromString(phoneNumber, 'US');
   const isValid = parsedNumber && parsedNumber.isValid();
@@ -86,19 +101,38 @@ function validatePhoneNumber(phoneNumber) {
   return isValid;
 }
 
-function validateInputPattern(input, pattern) {
-  const regex = new RegExp(pattern);
-  return regex.test(input.value);
+// function validateInputPattern(input, pattern) {
+//   const regex = new RegExp(pattern);
+//   return regex.test(input.value);
+// }
+
+function validateEmail(email) {
+  const regex = /^([a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,})$/i;
+  return regex.test(String(email).toLowerCase());
 }
 
+// function validateName(name) {
+
+// }
+
 function validateInputs() {
-  const emailPattern = '^([a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,})$';
-  if (!validateEmptyFields() ||
-  !validatePasswords()  ||
-  !validateInputPattern(email, emailPattern) ||
-  !validatePhoneNumber(phone.value)) {
+  if (!validateEmptyFields()) {
     return;
   }
+  if (!validateEmail(email.value)) {
+    alert('Invalid email address.');
+    return;
+  }
+  if (!validatePhoneNumber(phone.value)) {
+    alert('Invalid phone number.');
+    return;
+  }
+  if (!validatePasswords(true)) {
+    alert('Passwords do not match.');
+    return;
+  }
+  alert('Form submitted successfully.');
+  return true;
 }
 
 passwordToggle.addEventListener('click', () => {
