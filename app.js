@@ -101,25 +101,39 @@ function validatePhoneNumber(phoneNumber) {
   return isValid;
 }
 
-// function validateInputPattern(input, pattern) {
-//   const regex = new RegExp(pattern);
-//   return regex.test(input.value);
-// }
-
-function validateEmail(email) {
-  const regex = /^([a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,})$/i;
-  return regex.test(String(email).toLowerCase());
+// Creates RegExp object
+function validateInputPattern(input, pattern) {
+  const regex = new RegExp(pattern);
+  return regex.test(input.value);
 }
 
-// function validateName(name) {
+// Checks to make sure name follows name pattern
+function validateName(name) {
+  const regex = /^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/i;
+  return validateInputPattern(name, regex);
+}
 
-// }
+// Checks to make sure email follows email pattern
+function validateEmail(email) {
+  const regex = /^([a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,})$/i;
+  return regex.test(String(email.value).toLowerCase());
+}
 
+// Validates all inputs
 function validateInputs() {
   if (!validateEmptyFields()) {
     return;
   }
-  if (!validateEmail(email.value)) {
+  console.log('Validating first name:', firstName.value);
+  if (!validateName(firstName)) {
+    alert('Invalid first name.');
+    return;
+  }
+  if (!validateName(lastName)) {
+    alert('Invalid last name');
+    return;
+  }
+  if (!validateEmail(email)) {
     alert('Invalid email address.');
     return;
   }
@@ -143,6 +157,7 @@ confirmPasswordToggle.addEventListener('click', () => {
   togglePasswordVisibility(confirmPassword, confirmPasswordToggle);
 });
 
+// Hides or displays password on click of eye icon
 function togglePasswordVisibility(passwordInput, toggleIcon) {
   if (passwordInput.type === 'password') {
     passwordInput.type = 'text';
