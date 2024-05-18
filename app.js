@@ -5,9 +5,15 @@ const email = document.querySelector('#email');
 const phone = document.querySelector('#phone');
 const password = document.querySelector('#password');
 const confirmPassword = document.querySelector('#confirm-password');
+const passwordInputs = document.querySelectorAll('.password-input');
+const success = document.querySelector('#submit-success');
 
 const passwordToggle = document.querySelector('#password + .field-icon');
 const confirmPasswordToggle = document.querySelector('#confirm-password + .field-icon');
+
+
+
+
 
 // Validates inputs on submit
 form.addEventListener('submit', (event) => {
@@ -24,6 +30,14 @@ form.addEventListener('submit', (event) => {
     formObject['password']  = '*****';
     delete formObject['confirm-password'];
     console.log(formObject);
+
+    success.style.display = 'inline-block';
+    firstName.value = '';
+    lastName.value = '';
+    email.value = '';
+    phone.value = '';
+    password.value = '';
+    confirmPassword.value = '';
   }
 });
 
@@ -48,7 +62,7 @@ function validateInputPattern(input, pattern) {
 
 // Checks to make sure name follows name pattern
 function validateName(name) {
-  const regex = /^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/i;
+  const regex = /^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]*$/i;
   return validateInputPattern(name, regex);
 }
 
@@ -76,9 +90,9 @@ phone.addEventListener('keypress', (event) => {
   }
 });
 
-// Limits phone field inputs to 0-9, , +, -, (, and )
+// Limits phone field inputs to 0-9, ' ', +, -, (, and )
 function allowedPhoneCharacters(event) {
-  var charCode = (event.which) ? event.which : event.keyCode;
+  const charCode = (event.which) ? event.which : event.keyCode;
   if ((charCode > 31 && (charCode < 48 || charCode > 57)) && // numeric (0-9)
       charCode !== 32 && // space  
       charCode !== 43 && // +
@@ -171,9 +185,6 @@ phone.addEventListener("countrychange", function() {
 function validatePasswords(isSubmitEvent) {
   if (password.value !== confirmPassword.value) {
     confirmPassword.classList.add('invalid');
-    if (isSubmitEvent) {
-      alert('Passwords do not match.');
-    }
     return false;
   }
 
@@ -195,12 +206,39 @@ function validatePhoneNumber(phoneNumber) {
   return isValid;
 }
 
+// Removes any existing error message under the given input field
+function removeErrorMessage(inputField) {
+  const error = inputField.parentNode.querySelector('.error-message');
+  if (error) {
+    inputField.parentNode.removeChild(error);
+  }
+}
+
+// Adds an error message under the given input field
+function addErrorMessage(inputField, message) {
+  removeErrorMessage(inputField);
+
+  const error = document.createElement('span');
+  error.className = 'error-message';
+  error.textContent = message;
+  inputField.parentNode.appendChild(error);
+}
+
+passwordInputs.forEach(input => {
+  input.addEventListener('input', () => {
+    if (validatePasswords(false)) {
+      passwordInputs.forEach(removeErrorMessage);
+    }
+  });
+});
+
 // Validates all inputs
 function validateInputs() {
+  let isValid = true;
+
   if (!validateEmptyFields()) {
     return;
   }
-  
   if (!validateName(firstName)) {
     alert('Invalid first name.');
     return;
@@ -218,13 +256,15 @@ function validateInputs() {
     return;
   }
   if (!validatePasswords(true)) {
-    alert('Passwords do not match.');
-    return;
+    addErrorMessage(password, 'Passwords do not match.');
+    addErrorMessage(confirmPassword, 'Passwords do not match.');
+    isValid = false;
   }
-  alert('Form submitted successfully.');
-  return true;
+
+  return isValid;
 }
 
+// Hides or displays password on click of eye icon
 passwordToggle.addEventListener('click', () => {
   togglePasswordVisibility(password, passwordToggle);
 });
@@ -233,7 +273,6 @@ confirmPasswordToggle.addEventListener('click', () => {
   togglePasswordVisibility(confirmPassword, confirmPasswordToggle);
 });
 
-// Hides or displays password on click of eye icon
 function togglePasswordVisibility(passwordInput, toggleIcon) {
   if (passwordInput.type === 'password') {
     passwordInput.type = 'text';
@@ -258,10 +297,13 @@ password.addEventListener('blur', () => {
 // Changes color of password rules to green as conditions are met
 password.addEventListener('input', () => {
   const passwordValue = password.value;
+  const invalid = '#FF0000';
   
-  document.querySelector('#rule-length').style.color = passwordValue.length >= 8 ? 'green' : 'darkred';
-  document.querySelector('#rule-uppercase').style.color = /[A-Z]/.test(passwordValue) ? 'green' : 'darkred';
-  document.querySelector('#rule-lowercase').style.color = /[a-z]/.test(passwordValue) ? 'green' : 'darkred';
-  document.querySelector('#rule-number').style.color = /\d/.test(passwordValue) ? 'green' : 'darkred';
-  document.querySelector('#rule-special').style.color = /[!@#$%+^&*()/|-]/.test(passwordValue) ? 'green' : 'darkred';
+  document.querySelector('#rule-length').style.color = passwordValue.length >= 8 ? 'green' : invalid;
+  document.querySelector('#rule-uppercase').style.color = /[A-Z]/.test(passwordValue) ? 'green' : invalid;
+  document.querySelector('#rule-lowercase').style.color = /[a-z]/.test(passwordValue) ? 'green' : invalid;
+  document.querySelector('#rule-number').style.color = /\d/.test(passwordValue) ? 'green' : invalid;
+  document.querySelector('#rule-special').style.color = /[!@#$%+^&*()/|-]/.test(passwordValue) ? 'green' : invalid;
 });
+
+

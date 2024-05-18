@@ -1,6 +1,8 @@
 :root {
   --main-color: #FFA0A0;
   --secondary-color: #FFA9A9;
+  --form-background-color: #f9fafb;
+  --invalid-color: #FF0000;
 }
 
 @font-face {
@@ -83,7 +85,7 @@ main {
 
 #form-section {
   flex: 1;
-  background-color: #f9fafb;
+  background-color: var(--form-background-color);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -164,7 +166,7 @@ input:valid:not(:placeholder-shown) {
 }
 
 input:invalid:not(:placeholder-shown) {
-  border-color: #FF0000;
+  border-color: var(--invalid-color);
 }
 
 .iti { 
@@ -174,16 +176,16 @@ input:invalid:not(:placeholder-shown) {
 
 .iti__selected-country { 
   width: 100%;
-  background-color: #f9fafb;
+  background-color: var(--form-background-color);
 }
 
 .iti__selected-country:hover {
-  background-color: #f9fafb;
+  background-color: var(--form-background-color);
   box-shadow: none ;
 }
 
 .invalid {
-  border-color: #FF0000 !important;
+  border-color: var(--invalid-color) !important;
 }
 
 .field-icon img{
@@ -200,11 +202,16 @@ input:invalid:not(:placeholder-shown) {
 }
 
 #password-rules {
-  margin-top: -15px;
-  height: 11rem;
-  color: darkred;
+  margin-top: -10px;
+  margin-bottom: -40px;
+  height: 12rem;
+  color: var(--invalid-color);
   padding-top: 0;
   transition: display 0.2s ease-out;
+}
+
+.error-message {
+  color: var(--invalid-color);
 }
 
 button {
@@ -223,6 +230,11 @@ button {
 button:hover {
   background-color: var(--secondary-color);
   box-shadow: 2px 2px 5px rgba(50, 49, 49, 0.1);
+}
+
+#submit-success {
+  margin-left: 20px;
+  color: green;
 }
 
 #login {
@@ -258,3 +270,4 @@ footer a {
 footer a:hover {
   color: #f6551b;
 }
+
