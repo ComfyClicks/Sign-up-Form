@@ -11,9 +11,56 @@ const success = document.querySelector('#submit-success');
 const passwordToggle = document.querySelector('#password + .field-icon');
 const confirmPasswordToggle = document.querySelector('#confirm-password + .field-icon');
 
-
-
-
+const countries = [
+  "ae", "ar", "at", "au", "be", "br", "ca", "ch", "cn", "co", "de", "dk", "es", "fi",
+  "fr", "gb", "gr", "hk", "hu", "id", "ie", "il", "in", "it", "jp", "kr", "mx", "my",
+  "nl", "no", "nz", "pl", "pt", "ro", "ru",  "sa", "se", "sg","th", "tr", "tw", "us", "za"
+];
+const maskPatterns = {
+  ae: "999 999 9999", // United Arab Emirates
+  ar: "9999-9999", // Argentina
+  at: "99999 99999", // Austria
+  au: "(99) 9999 9999", // Australia
+  be: "9999 99 99 99", // Belgium
+  br: "(99) 99999-9999", // Brazil
+  ca: "(999) 999-9999", // Canada
+  ch: "99 999 99 99", // Switzerland
+  cn: "999 9999 9999", // China
+  co: "(999) 999 9999", // Colombia
+  de: "(9999) 999999", // Germany
+  dk: "99 99 99 99", // Denmark
+  es: "999 999 999", // Spain
+  fi: "999 999 99 99", // Finland
+  fr: "99 99 99 99 99", // France
+  gb: "99 9999 9999", // United Kingdom
+  gr: "999 999 9999", // Greece
+  hk: "9999 9999", // Hong Kong
+  hu: "(99) 999 9999", // Hungary
+  id: "(99) 9999 999999", // Indonesia
+  ie: "999 999 9999", // Ireland
+  il: "999-999-9999", // Israel
+  in: "9999 999 999", // India
+  it: "999 9999999", // Italy
+  jp: "99-9999-9999", // Japan
+  kr: "99-9999-9999", // South Korea
+  mx: "(999) 999 9999", // Mexico
+  my: "99-999 9999", // Malaysia
+  nl: "99 999 9999", // Netherlands
+  no: "999 99 999", // Norway
+  nz: "99 999 9999", // New Zealand
+  pl: "999 999 999", // Poland
+  pt: "999 999 999", // Portugal
+  ro: "9999 999 999", // Romania
+  ru: "(999) 999-99-99", // Russia
+  sa: "999 999 9999", // Saudi Arabia
+  se: "99 999 99 99", // Sweden
+  sg: "9999 9999", // Singapore
+  th: "99 999 9999", // Thailand
+  tr: "(999) 999 99 99", // Turkey
+  tw: "9999 999 999", // Taiwan
+  us: "(999) 999-9999", // United States
+  za: "(999) 999-9999", // South Africa
+};
 
 // Validates inputs on submit
 form.addEventListener('submit', (event) => {
@@ -110,7 +157,7 @@ let iti = window.intlTelInput(phone, {
   separateDialCode: true,
   autoPlaceholder: "aggressive",
   countryOrder: ["us"],
-  onlyCountries: ["ae", "au", "br", "ca", "cn", "de", "es", "fr", "gb", "in", "it", "mx", "nl", "ru", "tr", "us", "za"], 
+  onlyCountries: countries, 
   geoIpLookup: callback => {
     fetch("https://ipapi.co/json")
       .then(res => res.json())
@@ -128,25 +175,6 @@ im.mask(phone);
 function updateInputMask(countryData) {
   const countryCode = countryData.iso2;
 
-  const maskPatterns = {
-    ae: "999 999 9999", // United Arab Emirates
-    au: "(99) 9999 9999", // Australia
-    br: "(99) 99999-9999", // Brazil
-    ca: "(999) 999-9999", // Canada
-    cn: "999 9999 9999", // China
-    de: "(9999) 999999", // Germany
-    es: "999 999 999", // Spain
-    fr: "99 99 99 99 99", // France
-    gb: "99 9999 9999", // United Kingdom
-    in: "9999 999 999", // India
-    it: "999 9999999", // Italy
-    mx: "(999) 999 9999", // Mexico
-    nl: "99 999 9999", // Netherlands
-    ru: "(999) 999-99-99", // Russia
-    tr: "(999) 999 99 99", // Turkey
-    us: "(999) 999-9999", // United States
-    za: "(999) 999-9999", // South Africa
-  };
   // Check if the country code has a defined mask pattern
   const maskPattern = maskPatterns[countryCode] || "(999) 999-9999";
 
@@ -305,5 +333,3 @@ password.addEventListener('input', () => {
   document.querySelector('#rule-number').style.color = /\d/.test(passwordValue) ? 'green' : invalid;
   document.querySelector('#rule-special').style.color = /[!@#$%+^&*()/|-]/.test(passwordValue) ? 'green' : invalid;
 });
-
-
