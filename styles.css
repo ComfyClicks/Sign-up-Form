@@ -199,6 +199,14 @@ input:invalid:not(:placeholder-shown) {
   filter: brightness(50%);
 }
 
+#password-rules {
+  margin-top: -15px;
+  height: 11rem;
+  color: darkred;
+  padding-top: 0;
+  transition: display 0.2s ease-out;
+}
+
 button {
   background-color: var(--main-color);
   color: white;

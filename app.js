@@ -243,3 +243,25 @@ function togglePasswordVisibility(passwordInput, toggleIcon) {
     toggleIcon.querySelector('img').src = './assets/show.svg';
   }
 }
+
+// Display the password rules when users start typing in the password field
+const passwordRules = document.querySelector('#password-rules');
+
+password.addEventListener('keydown', () => {
+  passwordRules.style.display = 'block';
+});
+
+password.addEventListener('blur', () => {
+  passwordRules.style.display = 'none';
+});
+
+// Changes color of password rules to green as conditions are met
+password.addEventListener('input', () => {
+  const passwordValue = password.value;
+  
+  document.querySelector('#rule-length').style.color = passwordValue.length >= 8 ? 'green' : 'darkred';
+  document.querySelector('#rule-uppercase').style.color = /[A-Z]/.test(passwordValue) ? 'green' : 'darkred';
+  document.querySelector('#rule-lowercase').style.color = /[a-z]/.test(passwordValue) ? 'green' : 'darkred';
+  document.querySelector('#rule-number').style.color = /\d/.test(passwordValue) ? 'green' : 'darkred';
+  document.querySelector('#rule-special').style.color = /[!@#$%+^&*()/|-]/.test(passwordValue) ? 'green' : 'darkred';
+});
