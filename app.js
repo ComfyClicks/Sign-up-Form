@@ -208,7 +208,6 @@ phone.addEventListener("countrychange", function() {
   phone.value = '';
 });
 
-
 // Checks that both password inputs match
 function validatePasswords(isSubmitEvent) {
   if (password.value !== confirmPassword.value) {

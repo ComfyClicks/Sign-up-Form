@@ -255,6 +255,7 @@ button:hover {
 
 footer {
   background-color: var(--main-color);
+  width: 100%;
   color: white;
   display: flex;
   align-items: center;
@@ -270,4 +271,3 @@ footer a {
 footer a:hover {
   color: #f6551b;
 }
-
