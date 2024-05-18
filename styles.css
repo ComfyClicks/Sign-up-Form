@@ -14,6 +14,11 @@
   body #logo-section {
     display: none;
   }
+
+  footer {
+    margin-top: 8rem;
+    margin-bottom: 0;
+  }
 }
 
 body {
@@ -90,6 +95,7 @@ main {
 /******** Form Section ********/
 
 #form-section {
+  width: 100%;
   flex: 1;
   background-color: var(--form-background-color);
   display: flex;
@@ -104,6 +110,7 @@ main {
 }
 
 form {
+  width: 100%;
   margin-top: -2rem;
   position: relative;
   top: 13%;
@@ -266,7 +273,6 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: .1rem;
   height: 3vh;
 }
 
