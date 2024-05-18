@@ -9,6 +9,7 @@ const confirmPassword = document.querySelector('#confirm-password');
 const passwordToggle = document.querySelector('#password + .field-icon');
 const confirmPasswordToggle = document.querySelector('#confirm-password + .field-icon');
 
+// Validates inputs on submit
 form.addEventListener('submit', (event) => {
   event.preventDefault();
   if (validateInputs()) {
@@ -22,7 +23,6 @@ form.addEventListener('submit', (event) => {
     // Removes password and confirmPassword from the logged form data
     formObject['password']  = '*****';
     delete formObject['confirm-password'];
-  
     console.log(formObject);
   }
 });
@@ -37,8 +37,25 @@ function validateEmptyFields() {
       return false;
     }
   }
-  console.log('validateEmptyFields returned true');
   return true;
+}
+
+// Creates RegExp object
+function validateInputPattern(input, pattern) {
+  const regex = new RegExp(pattern);
+  return regex.test(input.value);
+}
+
+// Checks to make sure name follows name pattern
+function validateName(name) {
+  const regex = /^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/i;
+  return validateInputPattern(name, regex);
+}
+
+// Checks to make sure email follows email pattern
+function validateEmail(email) {
+  const regex = /^([a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,})$/i;
+  return regex.test(String(email.value).toLowerCase());
 }
 
 password.addEventListener('input', () => {
@@ -73,6 +90,83 @@ function allowedPhoneCharacters(event) {
   return true;
 }
 
+// Initialize the International Telephone Input library
+let iti = window.intlTelInput(phone, {
+  initialCountry: "auto",
+  separateDialCode: true,
+  autoPlaceholder: "aggressive",
+  countryOrder: ["us"],
+  onlyCountries: ["ae", "au", "br", "ca", "cn", "de", "es", "fr", "gb", "in", "it", "mx", "nl", "ru", "tr", "us", "za"], 
+  geoIpLookup: callback => {
+    fetch("https://ipapi.co/json")
+      .then(res => res.json())
+      .then(data => callback(data.country_code))
+      .catch(() => callback("us"));
+  },
+  utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.13/js/utils.js",
+});
+
+// Initialize the InputMask library with a default mask
+let im = new Inputmask("(999) 999-9999");
+im.mask(phone);
+
+// Function to update the input mask based on the selected country
+function updateInputMask(countryData) {
+  const countryCode = countryData.iso2;
+
+  const maskPatterns = {
+    ae: "999 999 9999", // United Arab Emirates
+    au: "(99) 9999 9999", // Australia
+    br: "(99) 99999-9999", // Brazil
+    ca: "(999) 999-9999", // Canada
+    cn: "999 9999 9999", // China
+    de: "(9999) 999999", // Germany
+    es: "999 999 999", // Spain
+    fr: "99 99 99 99 99", // France
+    gb: "99 9999 9999", // United Kingdom
+    in: "9999 999 999", // India
+    it: "999 9999999", // Italy
+    mx: "(999) 999 9999", // Mexico
+    nl: "99 999 9999", // Netherlands
+    ru: "(999) 999-99-99", // Russia
+    tr: "(999) 999 99 99", // Turkey
+    us: "(999) 999-9999", // United States
+    za: "(999) 999-9999", // South Africa
+  };
+  // Check if the country code has a defined mask pattern
+  const maskPattern = maskPatterns[countryCode] || "(999) 999-9999";
+
+  // Set the placeholder of the phone input field to the mask pattern
+  phone.placeholder = maskPattern.replace(/9/g, '_');
+
+  im = new Inputmask({
+    mask: maskPattern,
+    onBeforeMask: function(value, opts) {
+      // Remove the parentheses before the value is masked
+      return value.replace(/\(/g, '').replace(/\)/g, '');
+    },
+    onBeforeWrite: function(event, buffer, caretPos, opts) {
+      // If the caret is at the end of the area code, move it to the start of the next group of digits
+      if (caretPos === 4 && buffer[caretPos] === ' ') {
+        return { caret: caretPos + 1 };
+      }
+    },
+  });
+  im.mask(phone);
+}
+
+// Listen for the "countrychange" event and update the input mask
+phone.addEventListener("countrychange", function() {
+  let countryDropdown = document.querySelector(".iti__selected-country");
+  if (countryDropdown) {
+    countryDropdown.setAttribute("tabindex", "1");
+  }
+  const countryData = iti.getSelectedCountryData();
+  updateInputMask(countryData);
+  phone.value = '';
+});
+
+
 // Checks that both password inputs match
 function validatePasswords(isSubmitEvent) {
   if (password.value !== confirmPassword.value) {
@@ -101,30 +195,12 @@ function validatePhoneNumber(phoneNumber) {
   return isValid;
 }
 
-// Creates RegExp object
-function validateInputPattern(input, pattern) {
-  const regex = new RegExp(pattern);
-  return regex.test(input.value);
-}
-
-// Checks to make sure name follows name pattern
-function validateName(name) {
-  const regex = /^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/i;
-  return validateInputPattern(name, regex);
-}
-
-// Checks to make sure email follows email pattern
-function validateEmail(email) {
-  const regex = /^([a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,})$/i;
-  return regex.test(String(email.value).toLowerCase());
-}
-
 // Validates all inputs
 function validateInputs() {
   if (!validateEmptyFields()) {
     return;
   }
-  console.log('Validating first name:', firstName.value);
+  
   if (!validateName(firstName)) {
     alert('Invalid first name.');
     return;

@@ -169,6 +169,14 @@ input:invalid:not(:placeholder-shown) {
   border-color: #FF0000;
 }
 
+.iti { 
+  width: 100%; 
+}
+
+.iti__selected-country { 
+  width: 100%; 
+}
+
 .invalid {
   border-color: #FF0000 !important;
 }

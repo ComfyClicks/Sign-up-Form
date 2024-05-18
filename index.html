@@ -5,9 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.4/build/css/intlTelInput.css">
   <script src="app.js" defer></script>
+  <!-- Phone number validation library -->
   <script src="https://cdn.jsdelivr.net/npm/libphonenumber-js@1.11.1/bundle/libphonenumber-js.min.js"></script>
+  <!-- International Telephone Input library provides flag dropdown for telephone input -->
+  <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.4/build/js/intlTelInput.min.js"></script>
+  <!-- Inputmask library provides phone number input masks -->
+  <script src="./dist/inputmask.js"></script>
 </head>
+
 <body>
   <main>
     <section id="logo-section">
@@ -52,7 +59,7 @@
               </div>
               <div class="form-field">
                 <label for="phone">PHONE NUMBER *</label>
-                <input type="tel" id="phone" name="phone" placeholder="(123) 456-7890" title="Please enter your phone number." required />
+                <input type="tel" id="phone" name="phone" title="Please enter your phone number." required />
               </div>
             </div>
           </fieldset>
