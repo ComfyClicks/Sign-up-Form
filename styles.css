@@ -10,6 +10,12 @@
   src: url('./assets/Norse-Bold.otf');
 }
 
+@media (max-width: 770px) {
+  body #logo-section {
+    display: none;
+  }
+}
+
 body {
   font-family: Tahoma, Verdana, sans-serif;
   background-color: #f5f5f5;
