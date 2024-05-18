@@ -90,6 +90,7 @@ main {
 /******** Form Section ********/
 
 #form-section {
+  width: 100%;
   flex: 1;
   background-color: var(--form-background-color);
   display: flex;
@@ -104,6 +105,7 @@ main {
 }
 
 form {
+  width: 100%;
   margin-top: -2rem;
   position: relative;
   top: 13%;
@@ -112,7 +114,7 @@ form {
 #form-container {
   background-color: white;
   padding: 3rem;
-  border-radius: 8px;
+  border-radius: 0;
   box-shadow: 0 5px 6px rgba(0, 0, 0, 0.1);
   padding-top: 1.2rem ;
   padding-right: 20%;
@@ -144,7 +146,7 @@ fieldset {
 }
 
 .form-field {
-  width: 240px;
+  width: 15rem;
   color: #343333;
 }
 
