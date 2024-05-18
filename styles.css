@@ -112,7 +112,7 @@ form {
 #form-container {
   background-color: white;
   padding: 3rem;
-  border-radius: 8px;
+  border-radius: 0;
   box-shadow: 0 5px 6px rgba(0, 0, 0, 0.1);
   padding-top: 1.2rem ;
   padding-right: 20%;
