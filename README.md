@@ -2,6 +2,7 @@
 
 # Sign-up-Form
 
+<img src="./assets/sign-up-form.png">
 
 ## Technologies Used 
 
