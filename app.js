@@ -177,7 +177,7 @@ function updateInputMask(countryData) {
 
   // Check if the country code has a defined mask pattern
   const maskPattern = maskPatterns[countryCode] || "(999) 999-9999";
-
+  
   // Set the placeholder of the phone input field to the mask pattern
   phone.placeholder = maskPattern.replace(/9/g, '_');
 
